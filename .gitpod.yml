@@ -1,0 +1,18 @@
+image: gitpod/workspace-full
+
+tasks:
+  - init: |
+      wget https://github.com/keycloak/keycloak/releases/download/21.1.1/keycloak-21.1.1.zip
+      unzip keycloak-21.1.1.zip
+      cd keycloak-21.1.1
+      export KEYCLOAK_ADMIN=admin
+      export KEYCLOAK_ADMIN_PASSWORD=AdminPass123
+      # start in dev mode (binds to port 8080)
+      ./bin/kc.sh start-dev
+    command: |
+      # keep the terminal alive so port 8080 is exposed
+      tail -f /dev/null
+
+ports:
+  - port: 8080
+    onOpen: open-preview
